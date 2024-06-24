@@ -12,9 +12,9 @@ import lombok.*;
 @AllArgsConstructor
 public class PalindromeCheckerRequestDTO {
 
-    @NotBlank(message = "userName is mandatory")
+    @NotBlank(message = "userName field is mandatory")
     private String userName;
 
-    @Validate(fieldValidator = PalindromeCheckerInputValidator.class, message = "text cannot contain numbers or whitespaces")
+    @Validate(fieldValidator = PalindromeCheckerInputValidator.class, message = "text field is mandatory and cannot contain numbers or whitespaces")
     private String text;
 }

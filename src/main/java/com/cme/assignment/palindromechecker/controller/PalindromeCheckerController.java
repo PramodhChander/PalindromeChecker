@@ -8,12 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/palindromechecker")
+@RequestMapping("/palindromechecker/api/v1/")
 public class PalindromeCheckerController {
 
     @Autowired
     private PalindromeCheckerUtils plaindromeCheckerUtils;
 
+    /**
+     * Main api method processing request
+     */
     @PostMapping("/isPalindrome")
     public PalindromeCheckerResponseDTO isPalindrome(@Valid @RequestBody PalindromeCheckerRequestDTO request) {
         boolean result = plaindromeCheckerUtils.isPalindrome(request.getText());

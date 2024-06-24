@@ -3,6 +3,10 @@ package com.cme.assignment.palindromechecker.validation;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * AbstractRegexValidator class used to validate fields based on regex
+ * regex field needs to be set in child class
+ */
 public abstract class AbstractRegexValidator extends AbstractValidator {
     protected String regex;
 

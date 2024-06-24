@@ -1,6 +1,8 @@
 package com.cme.assignment.palindromechecker.service;
 
 import com.cme.assignment.palindromechecker.entity.PalindromeCheckerEntity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.cache.CacheManager;
@@ -18,21 +20,34 @@ import java.util.Objects;
 @EnableCaching
 public class PalindromeCheckerCacheService {
 
-    @Autowired
-    PalindromeCheckerDaoService daoService;
+    Logger logger = LoggerFactory.getLogger(PalindromeCheckerCacheService.class);
 
+    @Autowired
+    PalindromeCheckerDaoService palindromeCheckerDaoService;
+
+    public static final String CACHE_NAME = "PalindromeCheckerCache";
+
+    /**
+     * Method for Caching using Concurrent Map
+     */
     @Bean
     public CacheManager getCacheManager() {
         SimpleCacheManager cacheManager = new SimpleCacheManager();
         cacheManager.setCaches(List.of(
-                new ConcurrentMapCache("Palindrome")));
+                new ConcurrentMapCache(CACHE_NAME)));
         return cacheManager;
     }
 
+    /**
+     * Bootup method to load cache records from DB file
+     */
     @EventListener(ApplicationReadyEvent.class)
     public void loadCache() {
-        for(PalindromeCheckerEntity entity : daoService.findAll()) {
-            Objects.requireNonNull(getCacheManager().getCache("Palindrome")).put(entity.getText(), entity.isPalindrome());
+        logger.info("Loading Cache PalindromeCheckerCache");
+        List<PalindromeCheckerEntity> entityList = palindromeCheckerDaoService.findAll();
+        for(PalindromeCheckerEntity entity : entityList) {
+            Objects.requireNonNull(getCacheManager().getCache(CACHE_NAME)).put(entity.getText(), entity.isPalindrome());
         }
+        logger.info(String.format("Loaded %d records into Cache", entityList.size()));
     }
 }

@@ -25,20 +25,35 @@ Repo also contains jar file in for direct execution.
 **Endpoint:** <br />
 `http://localhost:8080/palindromechecker/api/v1/isPalindrome`
 
-**Request:** <br />
+**Request Structure:** <br />
+
+| Field  | Is Mandatory | Description |
+| ------------- | ------------- | ------------ |
+| userName  | true  | Username which can be used for future authorizations |
+| text  | true  | text field to check for palindrome |
+
+**Sample Request:** <br />
 ```json
 { 
-    "userName":"Pramodh", // Username which can be used for future authorizations 
-    "text":"malayalam" // text field to check for palindrome 
+    "userName":"Pramodh", 
+    "text":"malayalam"
 }
 ```
+
+**Response Structure:** <br />
+
+| Field  | Is Mandatory | Description |
+| ------------- | ------------- | ------------ |
+| status  | true  | Tells whether the API invocation is Success or Failure or Error (in case of Exception)  |
+| isPalindrome  | false  | Flag which marks whether the given text is palindrome or not |
+| message  | true  | Generic message that can contain error message incase of any error  |
 
 **Success Response: (Http Response code - 200)** <br />
 ```json
 { 
-    "status": "Success", // Tells whether the API invocation is Success or Failure or Error (in case of Exception) 
-    "isPalindrome": true, // Flag which marks whether the given text is palindrome or not 
-    "message": "malayalam is a Palindrome" // Generic message that can contain error message incase of any error 
+    "status": "Success", 
+    "isPalindrome": true, 
+    "message": "malayalam is a Palindrome" 
 }
 ```
 

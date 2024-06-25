@@ -9,7 +9,7 @@ Repo also contains jar file in for direct execution.
 
 ### Steps to test the Api:
 
-1. Download the jar from <br />
+1. Download the jar from [Jar File](https://github.com/PramodhChander/PalindromeChecker/blob/master/out/artifacts/palindromechecker_jar/palindromechecker.jar) <br />
 2. Run the jar file using the below command <br />
    `java -jar palindromechecker.jar` <br />
    Note: Make sure that java path is set and command is run from the downloaded path <br />
